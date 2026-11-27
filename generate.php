@@ -21,9 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && in_array($aite, $aite_list) && in_array($youken, $youken_list) && in_array($tone, $tone_list)) {
 
     // 条件に合う言い訳をランダムに1つ取り出す
-    $stmt = $pdo->prepare('SELECT id, excuse FROM gomen_excuses WHERE aite = ? AND youken = ? AND tone = ? ORDER BY RANDOM() LIMIT 1');
+    $stmt = $pdo->prepare('SELECT id, excuse, bareta, barenakatta FROM gomen_excuses WHERE aite = ? AND youken = ? AND tone = ? ORDER BY RANDOM() LIMIT 1');
     $stmt->execute([$aite, $youken, $tone]);
     $row = $stmt->fetch();
+
+    // 信ぴょう性（バレなかった人の割合）
+    $total = $row['bareta'] + $row['barenakatta'];
+    $cred  = $total > 0 ? round($row['barenakatta'] / $total * 100) : 0;
 }
 ?>
 <!DOCTYPE html>
@@ -86,6 +90,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
           <span class="tag"><?= h($tone) ?></span>
         </div>
         <p id="excuse" class="result-text"><?= h($row['excuse']) ?></p>
+
+        <!-- 信ぴょう性 -->
+        <div class="gen-cred">
+          <div class="gen-cred-head">
+            <span class="gen-cred-label">信ぴょう性</span>
+            <span class="gen-cred-value"><?= h($cred) ?><small>%</small></span>
+          </div>
+          <div class="cred-bar"><div style="width: <?= h($cred) ?>%"></div></div>
+          <span class="cred-count">回答 <?= h($total) ?>人（バレなかった <?= h($row['barenakatta']) ?>人 ／ バレた <?= h($row['bareta']) ?>人）</span>
+        </div>
 
         <div class="result-actions">
           <!-- コピーしてアンケートページへ -->

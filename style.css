@@ -405,6 +405,44 @@ button.btn-primary { color: #FFFFFF; }
 
 button.btn-dark { color: #FFFFFF; border: 0; }
 
+/* ---------- 生成結果の信ぴょう性 ---------- */
+.gen-cred {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: var(--blue-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gen-cred-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.gen-cred-label {
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.gen-cred-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.gen-cred-value small {
+  font-size: 18px;
+  margin-left: 2px;
+}
+
+.gen-cred .cred-bar {
+  background: #FFFFFF;
+}
+
 /* ---------- 生成結果のボタン ---------- */
 .result-actions {
   display: flex;
