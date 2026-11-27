@@ -823,23 +823,18 @@ a.btn-dark { color: #FFFFFF; }
 
 /* もう終わりだと思わせる空白（100vh = 画面1枚ぶん） */
 .footer-gap {
-  height: 150vh;
+  height: 200vh;
 }
 
 .footer-long {
   max-width: 640px;
   margin: 0 auto;
-  text-align: left;
-  line-height: 1.9;
-}
-
-.footer-long h2 {
-  font-size: 14px;
-  margin: 0 0 16px;
+  text-align: center;   /* 改行した行を真ん中にそろえる */
+  line-height: 2.2;     /* 行の間を少し広く */
 }
 
 .footer-long p {
-  margin: 0 0 14px;
+  margin: 0 0 48px;     /* 段落の間を大きくあける */
 }
 
 .footer-long .footer-end {
