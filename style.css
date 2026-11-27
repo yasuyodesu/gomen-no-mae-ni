@@ -823,7 +823,7 @@ a.btn-dark { color: #FFFFFF; }
 
 /* もう終わりだと思わせる空白（100vh = 画面1枚ぶん） */
 .footer-gap {
-  height: 200vh;
+  height: 100vh;
 }
 
 .footer-long {

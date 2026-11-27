@@ -61,7 +61,7 @@ if (isset($_POST['logout'])) {
 
     <footer class="footer">
     <!-- 最初に見える部分 -->
-    <p class="footer-catch">言い訳は、謝るための準備運動。</p>
+    <p class="footer-copy">言い訳は、謝るための準備運動。</p>
     <p class="footer-copy">© ごめんの前に</p>
 
     <!-- 空白（もう終わりだと思わせる） -->
