@@ -46,10 +46,36 @@ if (!$row) {
 
 $before = null;   // 回答前の信ぴょう性
 
+// ---------- 回答したあとに出す一言（ランダムに1つ選ぶ） ----------
+$messages = [
+    'barenakatta' => [
+        '完全犯罪、成立。',
+        '何事もなかったかのように、日常へ。',
+        'ミッション、コンプリート。',
+        'この秘密は、墓場まで。',
+        '相手は何も知らない。それでいい。',
+        '次に会うときも、何食わぬ顔で。',
+        '平和は守られた。',
+        '真実は、闇の中へ。',
+    ],
+    'bareta' => [
+        'ドンマイ。正直に謝るなら、今。',
+        '相手のほうが一枚上手だった。',
+        'バレるまでが、言い訳。',
+        'そろそろ「ごめん」の出番。',
+        '嘘は、たいていバレる。',
+        'ここからは「ごめん」の時間。',
+        '素直さこそ、最強の言い訳。',
+        '潔く謝れば、まだ間に合う。',
+    ],
+];
+$message = '';
+
 // ---------- 回答を受け取ったら人数を1増やす ----------
 $answer = $_POST['answer'] ?? '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$voted && ($answer === 'bareta' || $answer === 'barenakatta')) {
     $before = round($row['barenakatta'] / ($row['bareta'] + $row['barenakatta']) * 100);
+    $message = $messages[$answer][array_rand($messages[$answer])];   // 一言を選ぶ
 
     // 言い訳の人数を増やす（列名は上で2つに絞っているので安全）
     $pdo->prepare("UPDATE gomen_excuses SET $answer = $answer + 1 WHERE id = ?")->execute([$row['id']]);
@@ -113,7 +139,11 @@ $cred  = $total > 0 ? round($row['barenakatta'] / $total * 100) : 0;
     <?php else: ?>
       <!-- 回答後 -->
       <section class="survey-question">
-        <h1><?= $before !== null ? '回答ありがとうございます' : '回答済みです' ?></h1>
+        <?php if ($message): ?>
+          <h1 class="survey-message <?= $answer === 'bareta' ? 'is-out' : 'is-safe' ?>"><?= h($message) ?></h1>
+        <?php else: ?>
+          <h1>回答済みです</h1>
+        <?php endif; ?>
         <div class="cred">
           <span class="cred-label">この言い訳の信ぴょう性</span>
           <span class="cred-value">

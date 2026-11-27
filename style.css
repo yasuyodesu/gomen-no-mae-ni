@@ -544,6 +544,15 @@ button.btn-safe, button.btn-out { color: #FFFFFF; }
   font-size: 14px;
 }
 
+/* 回答後の一言 */
+.survey-message {
+  font-size: 30px !important;
+  line-height: 1.5;
+}
+
+.survey-message.is-safe { color: var(--blue); }
+.survey-message.is-out  { color: var(--accent-dark); }
+
 /* 信ぴょう性 */
 .cred {
   width: 100%;
