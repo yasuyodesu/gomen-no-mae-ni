@@ -1,0 +1,14 @@
+# =============================================
+# Render の設定（Blueprint）
+# データベースは Neon を使うので、接続文字列を DATABASE_URL に入れる
+# =============================================
+services:
+  - type: web
+    name: gomen-no-mae-ni
+    runtime: docker
+    plan: free
+    region: singapore          # 日本から近い地域
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        sync: false            # Render の画面で Neon の接続文字列を入力する
